@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import { log } from '../../log.ts';
 
@@ -28,7 +28,9 @@ interface CounterProps {
   initialCount: number;
 }
 
-const Counter = ({ initialCount }: CounterProps) => {
+// use memo() higher as possible in the component hierarchy tree.
+// avoid memo() in component that frequently change - no reason to memorize the component.
+const Counter = memo(({ initialCount }: CounterProps) => {
   log('<Counter /> rendered', 1);
   const initialCountIsPrime = isPrime(initialCount);
 
@@ -59,6 +61,6 @@ const Counter = ({ initialCount }: CounterProps) => {
       </p>
     </section>
   );
-};
+});
 
 export default Counter;
