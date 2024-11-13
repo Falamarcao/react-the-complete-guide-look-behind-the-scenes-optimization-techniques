@@ -1,33 +1,27 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 import Counter from './components/Counter/Counter';
 import Header from './components/Header';
 import { log } from './log.js';
+import ConfigureCounter from './components/Counter/ConfigureCounter.js';
 
 const App = () => {
   log('<App /> rendered');
 
-  const [enteredNumber, setEnteredNumber] = useState(0);
   const [chosenCount, setChosenCount] = useState(0);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredNumber(+event.target.value);
+  const handleSetCount = (value: number) => {
+    setChosenCount(value);
   };
 
-  const handleSetClick = () => {
-    setChosenCount(enteredNumber);
-    setEnteredNumber(0);
-  };
+  // By creating ConfigureCounter and moving the state internally
+  // We no long need the memo() inside/around Counter component. (Refers to commit a556e4c2865509996a220791bc5ba35712ab695f)
 
   return (
     <>
       <Header />
       <main>
-        <section id="configure-counter">
-          <h2>Set Counter</h2>
-          <input type="number" onChange={handleChange} value={enteredNumber} />
-          <button onClick={handleSetClick}>Set</button>
-        </section>
+        <ConfigureCounter onSet={handleSetCount} />
         <Counter initialCount={chosenCount} />
       </main>
     </>
