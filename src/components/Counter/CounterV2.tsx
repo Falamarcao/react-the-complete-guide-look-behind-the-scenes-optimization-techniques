@@ -1,4 +1,4 @@
-import { useState, memo, useCallback, useMemo } from 'react';
+import { useState, memo, useCallback, useMemo, useEffect } from 'react';
 
 import IconButton from '../UI/IconButton.jsx';
 import MinusIcon from '../UI/Icons/MinusIcon.jsx';
@@ -37,11 +37,17 @@ const Counter = memo(function Counter({ initialCount }: CounterProps) {
     () => isPrime(initialCount),
     [initialCount]
   );
-
   // const [counter, setCounter] = useState(initialCount);
   const [counterChanges, setCounterChanges] = useState<CounterModel[]>([
     { value: initialCount, id: Math.random() * 1000 },
   ]);
+
+  // The example below of useEffect is not optimal because trigger component re-executing.
+  // It is better to use a key in file App.tsx on CounterV2 component.
+
+  //   useEffect(() => {
+  //     setCounterChanges([{ value: initialCount, id: Math.random() * 1000 }]);
+  //   }, [initialCount]);
 
   const currentCounter = counterChanges.reduce(
     (prevCounter, counterChange) => prevCounter + counterChange.value,
