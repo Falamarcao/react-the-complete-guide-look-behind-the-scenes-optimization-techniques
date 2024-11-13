@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { log } from '../../log.ts';
+import { CounterModel } from '../../models/CounterModel.ts';
 
 interface HistoryItemProps {
   count: number;
@@ -23,7 +24,7 @@ const HistoryItem = ({ count }: HistoryItemProps) => {
 };
 
 interface CounterHistoryProps {
-  history: number[];
+  history: CounterModel[];
 }
 
 const CounterHistory = ({ history }: CounterHistoryProps) => {
@@ -31,8 +32,8 @@ const CounterHistory = ({ history }: CounterHistoryProps) => {
 
   return (
     <ol>
-      {history.map((count, index) => (
-        <HistoryItem key={index} count={count} />
+      {history.map((count: CounterModel) => (
+        <HistoryItem key={count.id} count={count.value} />
       ))}
     </ol>
   );

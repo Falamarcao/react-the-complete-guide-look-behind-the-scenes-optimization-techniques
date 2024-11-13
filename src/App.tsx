@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Counter from './components/Counter/Counter';
+import CounterV2 from './components/Counter/CounterV2';
 import Header from './components/Header';
 import { log } from './log.js';
 import ConfigureCounter from './components/Counter/ConfigureCounter.js';
@@ -24,7 +24,8 @@ const App = () => {
       <Header />
       <main>
         <ConfigureCounter onSet={handleSetCount} />
-        <Counter initialCount={chosenCount} />
+        <CounterV2 initialCount={chosenCount} />
+        <CounterV2 initialCount={chosenCount} />
       </main>
     </>
   );
