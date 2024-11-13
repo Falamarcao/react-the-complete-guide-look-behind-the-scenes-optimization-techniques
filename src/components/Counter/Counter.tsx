@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { log } from '../../log.ts';
 
@@ -28,11 +28,16 @@ interface CounterProps {
   initialCount: number;
 }
 
-// use memo() higher as possible in the component hierarchy tree.
-// avoid memo() in component that frequently change - no reason to memorize the component.
 const Counter = ({ initialCount }: CounterProps) => {
   log('<Counter /> rendered', 1);
-  const initialCountIsPrime = isPrime(initialCount);
+
+  // useMemo is different from memo()
+  // useMemo is for avoid function re-execution. memo() is for JSX/TSX components.
+  // Use only in heavy functions - this is just an example.
+  const initialCountIsPrime = useMemo(
+    () => isPrime(initialCount),
+    [initialCount]
+  );
 
   const [counter, setCounter] = useState(initialCount);
 
