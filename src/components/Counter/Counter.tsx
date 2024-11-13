@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { log } from '../../log.ts';
 
@@ -36,13 +36,16 @@ const Counter = ({ initialCount }: CounterProps) => {
 
   const [counter, setCounter] = useState(initialCount);
 
-  function handleDecrement() {
+  const handleDecrement = useCallback(() => {
     setCounter((prevCounter) => prevCounter - 1);
-  }
+  }, []);
 
-  function handleIncrement() {
+  const handleIncrement = useCallback(() => {
     setCounter((prevCounter) => prevCounter + 1);
-  }
+  }, []);
+
+  // To avoid rerendering IconButton we wrap the component with memo().
+  // Also, we apply useCallback to prevent function recreation and trigger IconButton rerendering.
 
   return (
     <section className="counter">

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ElementType, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ElementType, memo, ReactNode } from 'react';
 import { log } from '../../log.ts';
 
 interface IconButtonProps
@@ -7,15 +7,17 @@ interface IconButtonProps
   icon: ElementType;
 }
 
-const IconButton = ({ children, icon: Icon, ...props }: IconButtonProps) => {
-  log('<IconButton /> rendered', 2);
+const IconButton = memo(
+  ({ children, icon: Icon, ...props }: IconButtonProps) => {
+    log('<IconButton /> rendered', 2);
 
-  return (
-    <button {...props} className="button">
-      <Icon className="button-icon" />
-      <span className="button-text">{children}</span>
-    </button>
-  );
-};
+    return (
+      <button {...props} className="button">
+        <Icon className="button-icon" />
+        <span className="button-text">{children}</span>
+      </button>
+    );
+  }
+);
 
 export default IconButton;
