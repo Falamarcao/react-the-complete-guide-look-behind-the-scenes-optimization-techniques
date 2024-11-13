@@ -15,7 +15,9 @@ const App = () => {
   };
 
   // By creating ConfigureCounter and moving the state internally
-  // We no long need the memo() inside/around Counter component. (Refers to commit a556e4c2865509996a220791bc5ba35712ab695f)
+  // We no long need the memo() inside/around Counter component.
+  // Refers to commit a556e4c2865509996a220791bc5ba35712ab695f
+  // https://github.com/falamarcao/react-the-complete-guide-look-behind-the-scenes-optimization-techniques/commit/a556e4c2865509996a220791bc5ba35712ab695f
 
   return (
     <>
